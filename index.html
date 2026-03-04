@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects — Alp Efe Karalar</title>
+  <meta name="description" content="Portfolio of projects by Alp Efe Karalar — AI/ML systems, systems engineering, full-stack applications, and DevOps infrastructure." />
+  <meta name="author" content="Alp Efe Karalar" />
+  <meta property="og:title" content="Projects — Alp Efe Karalar" />
+  <meta property="og:description" content="AI/ML systems, systems engineering, full-stack applications, and DevOps infrastructure." />
+  <meta property="og:url" content="https://projects.alpkaralar.com" />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- ─── Navigation ─── -->
+<nav class="site-nav" id="nav">
+  <div class="container">
+    <a href="https://alpkaralar.com" class="nav-logo" aria-label="Alp Karalar home">
+      <span class="nav-logo-dot" aria-hidden="true"></span>
+      alp karalar
+    </a>
+    <a href="https://alpkaralar.com" class="nav-back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+      alpkaralar.com
+    </a>
+  </div>
+</nav>
+
+<main>
+  <!-- ─── Hero ─── -->
+  <section class="page-hero">
+    <div class="container">
+      <p class="hero-kicker">Portfolio</p>
+      <h1>Projects</h1>
+      <p class="hero-sub">A collection of things I've built — spanning AI/ML pipelines, systems engineering, full-stack applications, and DevOps infrastructure.</p>
+      <div class="hero-stats" aria-label="Portfolio statistics">
+        <div class="hero-stat">
+          <span class="hero-stat-num" id="stat-total">9</span>
+          <span class="hero-stat-label">Projects</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">4</span>
+          <span class="hero-stat-label">Categories</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-num" id="stat-live">3</span>
+          <span class="hero-stat-label">Live Demos</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Controls ─── -->
+  <div class="controls-bar" role="search" aria-label="Filter and search projects">
+    <div class="container">
+      <div class="controls-inner">
+        <div class="controls-top">
+          <div class="search-wrap">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input
+              type="search"
+              class="search-input"
+              id="search-input"
+              placeholder="Search projects, technologies..."
+              autocomplete="off"
+              spellcheck="false"
+              aria-label="Search projects"
+            />
+          </div>
+          <select class="sort-select" id="sort-select" aria-label="Sort projects">
+            <option value="newest">Newest first</option>
+            <option value="oldest">Oldest first</option>
+            <option value="az">A → Z</option>
+            <option value="za">Z → A</option>
+          </select>
+          <span class="results-count" id="results-count" aria-live="polite"></span>
+        </div>
+        <div class="filter-chips" id="filter-chips" role="group" aria-label="Filter by category"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── Grid ─── -->
+  <section class="projects-section" aria-label="Projects">
+    <div class="container">
+      <div class="projects-grid" id="projects-grid"></div>
+    </div>
+  </section>
+</main>
+
+<!-- ─── Footer ─── -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-links">
+        <a href="https://alpkaralar.com" class="footer-link">alpkaralar.com</a>
+        <a href="https://github.com/efekaralar" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub</a>
+        <a href="https://www.linkedin.com/in/alp-efe-karalar/" target="_blank" rel="noopener noreferrer" class="footer-link">LinkedIn</a>
+        <a href="https://medium.com/@karalar.alpefe" target="_blank" rel="noopener noreferrer" class="footer-link">Blog</a>
+      </div>
+      <p class="footer-copy">© <span id="year"></span> Alp Efe Karalar</p>
+    </div>
+  </div>
+</footer>
+
+<script src="data.js"></script>
+<script>
+// ─── SVG icons ─────────────────────────────────────────────────────────────
+const ICON_GITHUB = `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.478 2 2 6.59 2 12.252c0 4.528 2.865 8.37 6.839 9.727.5.097.683-.222.683-.494 0-.244-.009-.891-.014-1.748-2.782.617-3.369-1.387-3.369-1.387-.455-1.181-1.11-1.496-1.11-1.496-.908-.638.069-.625.069-.625 1.004.072 1.532 1.056 1.532 1.056.892 1.57 2.341 1.116 2.91.853.091-.665.349-1.116.635-1.372-2.221-.258-4.555-1.14-4.555-5.073 0-1.12.39-2.036 1.029-2.754-.103-.259-.446-1.301.098-2.712 0 0 .84-.276 2.75 1.052A9.38 9.38 0 0 1 12 6.862c.85.004 1.706.117 2.504.344 1.909-1.328 2.748-1.052 2.748-1.052.546 1.411.202 2.453.1 2.712.64.718 1.028 1.634 1.028 2.754 0 3.943-2.338 4.812-4.566 5.065.359.319.678.948.678 1.911 0 1.379-.012 2.492-.012 2.831 0 .274.18.595.688.493C19.138 20.618 22 16.778 22 12.252 22 6.59 17.522 2 12 2Z"/></svg>`;
+
+const ICON_EXTERNAL = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>`;
+
+const ICON_BLOG = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>`;
+
+const ICON_ARROW_RIGHT = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>`;
+
+const ICON_IMAGE = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>`;
+
+// ─── State ─────────────────────────────────────────────────────────────────
+let activeCategory = "all";
+let searchQuery    = "";
+let sortMode       = "newest";
+
+// ─── DOM refs ──────────────────────────────────────────────────────────────
+const nav          = document.getElementById("nav");
+const grid         = document.getElementById("projects-grid");
+const searchInput  = document.getElementById("search-input");
+const sortSelect   = document.getElementById("sort-select");
+const filterChips  = document.getElementById("filter-chips");
+const resultsCount = document.getElementById("results-count");
+
+// ─── Nav scroll ────────────────────────────────────────────────────────────
+window.addEventListener("scroll", () => {
+  nav.classList.toggle("scrolled", window.scrollY > 10);
+}, { passive: true });
+
+// ─── Year ──────────────────────────────────────────────────────────────────
+document.getElementById("year").textContent = new Date().getFullYear();
+
+// ─── Live demo count ───────────────────────────────────────────────────────
+document.getElementById("stat-live").textContent =
+  PROJECTS.filter(p => p.demoUrl && p.demoUrl !== p.githubUrl).length;
+
+// ─── Helpers ───────────────────────────────────────────────────────────────
+function getCatLabel(id) {
+  return CATEGORIES.find(c => c.id === id)?.label ?? id;
+}
+
+function formatDate(dateStr) {
+  const [y, m] = dateStr.split("-");
+  return new Date(+y, +m - 1).toLocaleDateString("en-US", { month: "short", year: "numeric" });
+}
+
+// ─── Filter + sort ─────────────────────────────────────────────────────────
+function getFiltered() {
+  let list = [...PROJECTS];
+
+  if (activeCategory !== "all") {
+    list = list.filter(p => p.category.includes(activeCategory));
+  }
+
+  if (searchQuery.trim()) {
+    const q = searchQuery.toLowerCase();
+    list = list.filter(p =>
+      p.title.toLowerCase().includes(q) ||
+      (p.subtitle || "").toLowerCase().includes(q) ||
+      p.shortDescription.toLowerCase().includes(q) ||
+      p.techStack.some(t => t.toLowerCase().includes(q)) ||
+      p.category.some(c => getCatLabel(c).toLowerCase().includes(q))
+    );
+  }
+
+  list.sort((a, b) => {
+    if (sortMode === "newest") return b.date.localeCompare(a.date);
+    if (sortMode === "oldest") return a.date.localeCompare(b.date);
+    if (sortMode === "az")     return a.title.localeCompare(b.title);
+    if (sortMode === "za")     return b.title.localeCompare(a.title);
+    return 0;
+  });
+
+  return list;
+}
+
+// ─── Render filter chips ───────────────────────────────────────────────────
+function renderChips() {
+  filterChips.innerHTML = CATEGORIES.map(cat => `
+    <button
+      class="filter-chip${activeCategory === cat.id ? " active" : ""}"
+      data-cat="${cat.id}"
+      aria-pressed="${activeCategory === cat.id}"
+    >${cat.label}</button>
+  `).join("");
+
+  filterChips.querySelectorAll(".filter-chip").forEach(btn => {
+    btn.addEventListener("click", () => {
+      activeCategory = btn.dataset.cat;
+      renderChips();
+      renderGrid();
+    });
+  });
+}
+
+// ─── Render a single card ──────────────────────────────────────────────────
+function renderCard(project, delay) {
+  const hasGithub = !!project.githubUrl;
+  const hasDemo   = !!project.demoUrl && project.demoUrl !== project.githubUrl;
+  const hasBlog   = !!project.blogUrl;
+
+  const catBadges = project.category.map(c =>
+    `<span class="card-cat">${getCatLabel(c)}</span>`
+  ).join("");
+
+  const techDisplay = project.techStack.slice(0, 5);
+  const techExtra   = project.techStack.length - techDisplay.length;
+  const techTags = techDisplay.map(t =>
+    `<span class="tech-tag">${t}</span>`
+  ).join("") + (techExtra > 0 ? `<span class="tech-tag">+${techExtra}</span>` : "");
+
+  const linkBtns = [
+    hasGithub ? `<a href="${project.githubUrl}" target="_blank" rel="noopener noreferrer" class="card-link" onclick="event.stopPropagation()" aria-label="GitHub repository for ${project.title}">${ICON_GITHUB} GitHub</a>` : "",
+    hasDemo   ? `<a href="${project.demoUrl}"   target="_blank" rel="noopener noreferrer" class="card-link" onclick="event.stopPropagation()" aria-label="Live demo for ${project.title}">${ICON_EXTERNAL} Demo</a>` : "",
+    hasBlog   ? `<a href="${project.blogUrl}"   target="_blank" rel="noopener noreferrer" class="card-link" onclick="event.stopPropagation()" aria-label="Blog post for ${project.title}">${ICON_BLOG} Blog</a>` : "",
+  ].filter(Boolean).join("");
+
+  return `
+    <article
+      class="project-card fade-up"
+      data-id="${project.id}"
+      role="button"
+      tabindex="0"
+      aria-label="View details for ${project.title}"
+      style="animation-delay: ${delay}s"
+    >
+      <div class="card-image-wrap">
+        <img
+          class="card-image"
+          src="${project.image}"
+          alt="${project.title} preview"
+          loading="lazy"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"
+        />
+        <div class="card-placeholder" style="display:none">${ICON_IMAGE}</div>
+      </div>
+      <div class="card-body">
+        <div class="card-cats">${catBadges}</div>
+        <h2 class="card-title">${project.title}</h2>
+        <p class="card-desc">${project.shortDescription}</p>
+        <div class="card-tech">${techTags}</div>
+      </div>
+      <div class="card-footer">
+        <div class="card-links">${linkBtns}</div>
+        <span class="card-view-btn">View ${ICON_ARROW_RIGHT}</span>
+      </div>
+    </article>
+  `;
+}
+
+// ─── Render grid ───────────────────────────────────────────────────────────
+function renderGrid() {
+  const filtered = getFiltered();
+
+  resultsCount.textContent = `${filtered.length} project${filtered.length !== 1 ? "s" : ""}`;
+
+  if (filtered.length === 0) {
+    grid.innerHTML = `
+      <div class="empty-state">
+        <h3>No projects found</h3>
+        <p>Try a different search term or category filter.</p>
+      </div>
+    `;
+    return;
+  }
+
+  grid.innerHTML = filtered.map((p, i) => renderCard(p, i * 0.07)).join("");
+
+  grid.querySelectorAll(".project-card").forEach(card => {
+    const navigate = () => { window.location.href = `project.html?id=${card.dataset.id}`; };
+    card.addEventListener("click", navigate);
+    card.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); navigate(); }
+    });
+  });
+}
+
+// ─── Event listeners ───────────────────────────────────────────────────────
+searchInput.addEventListener("input", e => { searchQuery = e.target.value; renderGrid(); });
+sortSelect.addEventListener("change", e => { sortMode = e.target.value; renderGrid(); });
+
+// ─── Init ──────────────────────────────────────────────────────────────────
+document.getElementById("stat-total").textContent = PROJECTS.length;
+renderChips();
+renderGrid();
+</script>
+</body>
+</html>
