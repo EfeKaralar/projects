@@ -76,7 +76,7 @@ Serve as a static site from the repo root.
 Domain: `projects.alpkaralar.com`
 No build step — pure HTML/CSS/JS.
 
-## Current Projects (9 total)
+## Current Projects (10 total)
 
 | id                          | Title                            | Categories         | Date    |
 |-----------------------------|----------------------------------|--------------------|---------|
@@ -85,7 +85,8 @@ No build step — pure HTML/CSS/JS.
 | project-research-summarizer | Research Summarizer              | fullstack, ml      | 2024-11 |
 | project-rust-load-balancer  | Rust Load Balancer               | systems, devops    | 2024-09 |
 | project-cicd-portfolio      | Automated CI/CD Deployment       | devops             | 2024-08 |
+| project-avt-autodrive       | Autonomous Vehicle Perception    | ml, systems        | 2024-06 |
 | project-music-rnn           | Classical Music Generation       | ml                 | 2024-05 |
 | project-mdadm               | Linux RAID Storage System        | systems            | 2024-03 |
-| project-lisp-interpreter    | Custom LISP Interpreter          | systems            | 2023-12 |
+| project-lisp-interpreter    | Custom LISP Interpreter          | systems            | 2024-10 |
 | project-embedded-audio      | Embedded Linux Audio Processor   | systems            | 2023-08 |
