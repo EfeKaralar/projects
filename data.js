@@ -8,6 +8,41 @@ const CATEGORIES = [
 
 const PROJECTS = [
   {
+    id:               "project-tafsirbot",
+    title:            "TafsirBot",
+    subtitle:         "RAG Pipeline for Islamic Scholarly Commentary",
+    shortDescription: "Retrieval-augmented generation system over classical Tafsir corpus with ayah-scoped chunking, hybrid dense/sparse search with RRF fusion, and guardrail-enforced multi-channel delivery across Telegram, web chat, WhatsApp, and X.",
+    fullDescription:  `TafsirBot is a production RAG system for Islamic scholarly Q&A,
+  surfacing commentary from Ibn Kathir and Maududi — with the corpus pipeline designed to
+  expand to Al-Qurtubi, Al-Tabari, Jalalayn, and Ibn Ashur. The ingestion pipeline runs
+  offline: source texts are cleaned of OCR artifacts and isnad chains, chunked strictly at Ayah
+   boundaries (never token windows), embedded, and upserted into Qdrant — each chunk tagged
+  with surah_number, ayah_start/end, scholar, language, corpus_type, and madhab metadata for
+  precision filtering at query time.\n\nThe retrieval stack uses a hybrid strategy: OpenAI
+  text-embedding-3-large (3072-dim) dense vectors paired with BM42 sparse vectors, fused via
+  server-side Reciprocal Rank Fusion in Qdrant. This lets the system handle semantic questions
+  and exact-term lookups (verse references like "2:255", transliterated Arabic, scholar names)
+  in a single pass. Metadata pre-filters narrow the candidate set when an Ayah reference is
+  detected in the query.\n\nA 7-step n8n sub-workflow handles all orchestration: input
+  normalization, intent classification (tafsir / general_islamic / fiqh_ruling / off_topic),
+  Ayah reference resolution against a static Quran JSON, hybrid retrieval, prompt assembly with
+   conversation history, LLM generation (Claude Sonnet or GPT-4o, temp 0.3), and
+  post-processing with structured citation extraction. Guardrails are non-negotiable: every
+  response cites at least one source, fiqh queries are answered with a "not a personal fatwa"
+  disclaimer, and low-confidence responses on X are held for human review rather than
+  auto-published.`,
+    techStack:        ["Python", "Qdrant", "n8n", "OpenAI Embeddings", "BM42", "Claude API",
+  "FastAPI", "Docker", "PostgreSQL", "RAG"],
+    category:         ["ml", "fullstack"],
+    timeline:         "Personal project",
+    date:             "2026-03",
+    githubUrl:        "https://github.com/EfeKaralar/TafsirBot",
+    demoUrl:          null,
+    blogUrl:          null,
+    image:            "assets/images/projects/tafsirbot.jpg",
+    featured:         true,
+  },
+  {
     id:               "project-sevanbot",
     title:            "SevanBOT",
     subtitle:         "RAG Pipeline for Writer Persona",
@@ -53,7 +88,7 @@ const PROJECTS = [
     demoUrl:          "https://researchtldr.xyz",
     blogUrl:          null,
     image:            "assets/images/projects/research-summarizer.jpg",
-    featured:         true,
+    featured:         false,
   },
   {
     id:               "project-rust-load-balancer",
